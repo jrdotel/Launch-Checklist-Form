@@ -1,5 +1,26 @@
 // Write your JavaScript code here!
 window.addEventListener("load", function() {
+   let json = [];
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+   response.json().then(function(json) {
+      const destination = document.getElementById("missionTarget");
+      let index = Math.floor(Math.random()*json.length);
+      destination.innerHTML = `
+         <h2>Mission Destination</h2>
+         <ol>
+            <li>Name: ${json[index].name}</li>
+            <li>Diameter: ${json[index].diameter}</li>
+            <li>Star: ${json[index].star}</li>
+            <li>Distance from Earth: ${json[index].distance}</li>
+            <li>Number of Moons: ${json[index].moons}</li>
+         </ol>
+         <img src="${json[index].image}">
+      `;
+      index = (index + 1) % json.length;
+      });
+   });
+
+
    let form = document.querySelector("form");
    form.addEventListener("submit", function(event) {
       let pilot = document.querySelector("input[name=pilotName]");
@@ -79,11 +100,11 @@ window.addEventListener("load", function() {
 /* This block of code shows how to format the HTML once you fetch some planetary JSON!
 <h2>Mission Destination</h2>
 <ol>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
+   <li>Name: ${json[index].name}</li>
+   <li>Diameter: ${json[index].diameter}</li>
+   <li>Star: ${json[index].star}</li>
+   <li>Distance from Earth: ${json[index].distance}</li>
+   <li>Number of Moons: ${json[index].moons}</li>
 </ol>
-<img src="${}">
+<img src="${json[index].image}">
 */
