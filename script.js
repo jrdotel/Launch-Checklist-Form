@@ -1,24 +1,40 @@
 // Write your JavaScript code here!
-window.addEventListener("load", function() {
-   let json = [];
-   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
    response.json().then(function(json) {
       const destination = document.getElementById("missionTarget");
       let index = Math.floor(Math.random()*json.length);
       destination.innerHTML = `
          <h2>Mission Destination</h2>
-         <ol>
-            <li>Name: ${json[index].name}</li>
-            <li>Diameter: ${json[index].diameter}</li>
-            <li>Star: ${json[index].star}</li>
-            <li>Distance from Earth: ${json[index].distance}</li>
-            <li>Number of Moons: ${json[index].moons}</li>
-         </ol>
-         <img src="${json[index].image}">
+      <ol>
+         <li>Name: ${json[index].name}</li>
+         <li>Diameter: ${json[index].diameter}</li>
+         <li>Star: ${json[index].star}</li>
+         <li>Distance from Earth: ${json[index].distance}</li>
+         <li>Number of Moons: ${json[index].moons}</li>
+      </ol>
+      <img src="${json[index].image}">
       `;
-      index = (index + 1) % json.length;
       });
    });
+   
+window.addEventListener("load", function() {
+   // fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+   // response.json().then(function(json) {
+   //    const destination = document.getElementById("missionTarget");
+   //    let index = Math.floor(Math.random()*json.length);
+   //    destination.innerHTML = `
+   //       <h2>Mission Destination</h2>
+   //    <ol>
+   //       <li>Name: ${json[index].name}</li>
+   //       <li>Diameter: ${json[index].diameter}</li>
+   //       <li>Star: ${json[index].star}</li>
+   //       <li>Distance from Earth: ${json[index].distance}</li>
+   //       <li>Number of Moons: ${json[index].moons}</li>
+   //    </ol>
+   //    <img src="${json[index].image}">
+   //    `;
+   //    });
+   // });
 
 
    let form = document.querySelector("form");
